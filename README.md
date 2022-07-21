@@ -1,4 +1,4 @@
-# MultiArmedBandit_Couponing
+# Building a Coupon Recommender Sysdem with Multi-Armed Bandits
 Final project for Udacity Data Science Nanodegree. Implementation of a coupon recommender system for Starbucks Mobile Rewards App. Applied methods are FunkSVD, k-Means Clustering and Multi-Armed Bandits. 
 
 ## **Table of Contents:**
@@ -7,21 +7,25 @@ Final project for Udacity Data Science Nanodegree. Implementation of a coupon re
 3. [Libraries used](README.md#libraries-used)
 4. [Licensing, Acknowledgements](README.md#licensing-acknowledgements)
 
-##VORLAGE
+## VORLAGE
 ## **Project Overview**<br/>
 In this project I will analyze the interactions that users have with articles on the IBM Watson Studio platform, and make recommendations to them about new articles  they will like. The following steps are included in the code:<br/>
 
-#### I. Data Wangling: <br/>
-Data preparation, distribution of user-article-interactions and most viewed articles
+#### I. Data Wrangling: <br/>
+The challenge was that the transcript data set creates a new row for each interaction. Consequently, the first row would show the time a customer received an offer. The next row would show the time when a customer viewed this or any other offer and the next row would show either the completion of an offer or a regular transaction. Furthermore, each customer could receive each offer multiple times or comlete an offer before he has seen it.<br/> 
+The goal of the data wrangling part was to create a master dataframe (named ´´df_mab´´), which shows the time and amount of each purchase as well as the time of contact, view, and completion of the offer that influenced the purchase in a single row. Also, the master dataframe contains purchases without offer infuence and offers that were not completed.<br/> 
+Additionally, a customer dataframe was created (named ´´df_member´´), containg each unique customer with aggregated values regarding his purchase behavior, such as the number of purchases and the amount spent overall, the number of purchases that are influenced by an offer, the number of viewed, completed and not completet offers etc. <br/> 
 
-#### II. Rank Based Recommendations: <br/>
+#### II. Exploratory Analysis: <br/>
 Find the most popular articles simply based on the most interactions. Since there are no ratings for any of the articles, it is easy to assume the articles with the most interactions are the most popular. These are then the articles could be recommend to new users.
 
-#### III. User-User Based Collaborative Filtering:<br/>
+#### III. FunkSVD:<br/>
 In order to build more personal recommendations for the users of IBM's platform, I match users that are similar in terms of the items they have interacted with. These items are then recommended to the similar users. 
 
-#### IV. Matrix Factorization:<br/>
+#### IV. k-Means Clustering:<br/>
 Finally, I will complete a machine learning approach to building recommendations. Using the user-item interactions, a matrix decomposition is built to get an idea of how well new articles are predicted/recommended for an individual.
+
+#### V. Multi-Armed Bandits: <br/>
 
 ## **Description of Data Sets**<br/>
 
@@ -68,15 +72,36 @@ person (str) - customer id<br/>
 time (int) - time in hours since start of test. The data begins at time t=0<br/>
 value - (dict of strings) - either an offer id or transaction amount depending on the record<br/>
 
+**The Data Sets created in Part I: Data Wrangling:**<br/>
+**df_mab.csv**<br/>
+member_id (string) - customer id <br/>
+time (int) - hour of the transaction. The data begins at time t=0<br/>
+amount (float) - amount of the purchase. Is 0 when an offer was not completed.<br/>
+offer_name (string) - 'No_offer' for transactions without offer influence.<br/>
+viewed (float) - 1 if the offer was viewed else 0.<br/>
+completed (float) - 1 if the offer was completed after beeing viewed else 0.<br/>
+performance (float) - <br/>
+
+**df_member.csv**<br/>
+member_id (string) - unique customer id <br/>
+nr_purch (float) - number of purchases made by the customer<br/>
+nr_purch_offer (float) - number of purchases that where influenced by an offer<br/>
+compl_offers (float) - number of completed offers (BOGO-offers could influence more than one purchase but are only completed once)<br/>
+amount_sum (float) - total spent amount during the comlete testing period<br/>
+amount_median (float) - median spent amount during the comlete testing period<br/>
+amount_std (float) - standard deviation of spent amount during the comlete testing period<br/>
+mean_hrs_compl (flaot) - mean hours between view and completion of an offer (if the offer was completed after beeing viewed)<br/>
+nr_NUO (float) - number of not-used-offers<br/>
+days_reg (int) - days since the registration (with today beeing the maximum registration date +1)<br/>
+
 ## **Libraries Used**<br/>
 Following libraries were used:<br/>
-- Nltk<br/>
 - Pandas<br/>
 - Progressbar<br/>
 - Seaborn<br/>
 - scikit-learn<br/>
 
 ## **Licensing, Acknowledgements**<br/>
-Thanks to IBM for providing the data.<br/>
-Thanks to Udacity for providing knowledge on Recommendation Engines and a platform to work on this project.<br/>
+Thanks to Starbucks for providing the data.<br/>
+Thanks to Udacity for providing knowledge on Data Science and a platform to work on this project.<br/>
 
