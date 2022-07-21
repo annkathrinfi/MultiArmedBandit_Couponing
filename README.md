@@ -7,7 +7,6 @@ Final project for Udacity Data Science Nanodegree. Implementation of a coupon re
 3. [Libraries used](README.md#libraries-used)
 4. [Licensing, Acknowledgements](README.md#licensing-acknowledgements)
 
-## VORLAGE
 ## **Project Overview**<br/>
 In this project I will analyze the purchases that Starbucks' customers make with and without offers sent by the Mobile Rewards App. Customers will be clustered based on their purchase behavior and a recommender system will be built, which sends offers to the customers that should optimize their performance. The following steps are included in the code:
 
