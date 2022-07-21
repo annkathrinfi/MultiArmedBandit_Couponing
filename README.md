@@ -47,7 +47,6 @@ profile.json - demographic data for each customer<br/>
 transcript.json - records for transactions, offers received, offers viewed, and offers completed<br/>
 <br/>
 Here is the schema and explanation of each variable in the files:<br/>
-<br/>
 **portfolio.json**<br/>
 id (string) - offer id<br/>
 offer_type (string) - type of offer ie BOGO, discount, informational<br/>
