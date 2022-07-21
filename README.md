@@ -34,7 +34,7 @@ Every offer has a validity period before the offer expires. As an example, a BOG
 
 The transactional data is showing user purchases made on the app including the timestamp of purchase and the amount of money spent on a purchase. This transactional data also has a record for each offer that a user receives as well as a record for when a user actually views the offer. There are also records for when a user completes an offer. Someone using the app might make a purchase through the app without having received an offer or seen an offer.<br/>
 
-**Example**<br/>
+**Example:**<br/>
 To give an example, a user could receive a discount offer buy 10 dollars get 2 off on Monday. The offer is valid for 10 days from receipt. If the customer accumulates at least 10 dollars in purchases during the validity period, the customer completes the offer.<br/>
 
 However, there are a few things to watch out for in the data set. Customers do not opt into the offers that they receive; in other words, a user can receive an offer, never actually view the offer, and still complete the offer. For example, a user might receive the "buy 10 dollars get 2 dollars off offer", but the user never opens the offer during the 10 day validity period. The customer spends 15 dollars during those ten days. There will be an offer completion record in the data set; however, the customer was not influenced by the offer because the customer never viewed the offer. This makes data cleaning especially important and tricky.<br/>
@@ -42,7 +42,6 @@ However, there are a few things to watch out for in the data set. Customers do n
 Some customer groups will make purchases even if they don't receive an offer. From a business perspective, if a customer is going to make a 10 dollar purchase without an offer anyway, we wouldn't want to send a buy 10 dollars get 2 dollars off offer. We'll want to try to assess what a certain customer group will buy when not receiving any offers.<br/>
 
 **The data is contained in three files:**<br/>
-<br/>
 portfolio.json - containing offer ids and meta data about each offer (duration, type, etc.)<br/>
 profile.json - demographic data for each customer<br/>
 transcript.json - records for transactions, offers received, offers viewed, and offers completed<br/>
