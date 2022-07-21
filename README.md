@@ -4,8 +4,9 @@ Final project for Udacity Data Science Nanodegree. Implementation of a coupon re
 ## **Table of Contents:**
 1. [Project Overview](README.md#project-Overview)
 2. [File Description](README.md#file-description)
-3. [Libraries used](README.md#libraries-used)
-4. [Licensing, Acknowledgements](README.md#licensing-acknowledgements)
+3. [Description of Data Sets](README.md#description-of-data-sets)
+4. [Libraries used](README.md#libraries-used)
+5. [Licensing, Acknowledgements](README.md#licensing-acknowledgements)
 
 ##VORLAGE
 ## **Project Overview**<br/>
