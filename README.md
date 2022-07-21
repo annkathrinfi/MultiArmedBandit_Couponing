@@ -9,23 +9,24 @@ Final project for Udacity Data Science Nanodegree. Implementation of a coupon re
 
 ## VORLAGE
 ## **Project Overview**<br/>
-In this project I will analyze the interactions that users have with articles on the IBM Watson Studio platform, and make recommendations to them about new articles  they will like. The following steps are included in the code:<br/>
+In this project I will analyze the purchases that Starbucks' customers make with and without offers sent by the Mobile Rewards App. Customers will be clustered based on their purchase behavior and a recommender system will be built, which sends offers to the customers that should optimize their performance. The following steps are included in the code:
 
 #### I. Data Wrangling: <br/>
 The challenge was that the transcript data set creates a new row for each interaction. Consequently, the first row would show the time a customer received an offer. The next row would show the time when a customer viewed this or any other offer and the next row would show either the completion of an offer or a regular transaction. Furthermore, each customer could receive each offer multiple times or comlete an offer before he has seen it.<br/> 
 The goal of the data wrangling part was to create a master dataframe (named ´´df_mab´´), which shows the time and amount of each purchase as well as the time of contact, view, and completion of the offer that influenced the purchase in a single row. Also, the master dataframe contains purchases without offer infuence and offers that were not completed.<br/> 
-Additionally, a customer dataframe was created (named ´´df_member´´), containg each unique customer with aggregated values regarding his purchase behavior, such as the number of purchases and the amount spent overall, the number of purchases that are influenced by an offer, the number of viewed, completed and not completet offers etc. <br/> 
+Additionally, a customer dataframe was created (named ´´df_member´´), containg each unique customer with aggregated values regarding his purchase behavior, such as the number of purchases and the amount spent overall, the number of purchases that are influenced by an offer, the number of viewed, completed and not completet offers etc.
 
 #### II. Exploratory Analysis: <br/>
 Find the most popular articles simply based on the most interactions. Since there are no ratings for any of the articles, it is easy to assume the articles with the most interactions are the most popular. These are then the articles could be recommend to new users.
 
 #### III. FunkSVD:<br/>
-In order to build more personal recommendations for the users of IBM's platform, I match users that are similar in terms of the items they have interacted with. These items are then recommended to the similar users. 
+Creating a user-by-item matrix with a row for each user, a column for each offer and the mean performance of each user when makeing a transaction with the offer. Transactions without an offer influence have the offer name "No_offer". Performing matrix factorization using a basic form of FunkSVD with no regularization and calculating the dot-product of user matrix and offer matrix, to predict missing values. The dot-products of each user-offer combination will be used to build customer clusters in the following step.
 
-#### IV. k-Means Clustering:<br/>
-Finally, I will complete a machine learning approach to building recommendations. Using the user-item interactions, a matrix decomposition is built to get an idea of how well new articles are predicted/recommended for an individual.
+#### IV. K-means Clustering:<br/>
+After merging variables like the number of purchases, median amount, number of completed offers and the days since registration to the dot-products of each user-offer combination, the number of clusters is selected with silhouette analysis (https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_silhouette_analysis.html). For 5-7 clusters the silhouette score is similarly high. The K-mean clustering is performed with 5 clusters and the mean reward for each cluster is calculated.
 
 #### V. Multi-Armed Bandits: <br/>
+Each cluster is considered as an agent and each offer is the arm of a slot machine. For this project, the the e-greedy-decay algorithm is used, which explores more in the begining and then slowly starts exploiting the most rewarding arm. However, exploration never reaches zero to assure a minimum of variance in the offers made to the customer clusters.
 
 ## **Description of Data Sets**<br/>
 
