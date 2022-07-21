@@ -45,10 +45,14 @@ However, there are a few things to watch out for in the data set. Customers do n
 
 Some customer groups will make purchases even if they don't receive an offer. From a business perspective, if a customer is going to make a 10 dollar purchase without an offer anyway, we wouldn't want to send a buy 10 dollars get 2 dollars off offer. We'll want to try to assess what a certain customer group will buy when not receiving any offers.<br/>
 
-**The data is contained in three files:**<br/>
+**Three files were provided:**<br/>
 portfolio.json - containing offer ids and meta data about each offer (duration, type, etc.)<br/>
 profile.json - demographic data for each customer<br/>
 transcript.json - records for transactions, offers received, offers viewed, and offers completed<br/>
+<br/>
+**Two files werer created in Part I: Data Wrangling:**<br/>
+df_mab.csv - contains the purchases of each member with a flag if an offer was used for the purchase or not, as well as offers that were not completed<br/>
+df_member.csv - contains unique members with aggregated KPI's regarding his purchase behavior<br/>
 <br/>
 Here is the schema and explanation of each variable in the files:<br/>
 **portfolio.json**<br/>
@@ -71,8 +75,7 @@ event (str) - record description (ie transaction, offer received, offer viewed, 
 person (str) - customer id<br/>
 time (int) - time in hours since start of test. The data begins at time t=0<br/>
 value - (dict of strings) - either an offer id or transaction amount depending on the record<br/>
-
-**The Data Sets created in Part I: Data Wrangling:**<br/>
+<br/>
 **df_mab.csv**<br/>
 member_id (string) - customer id <br/>
 time (int) - hour of the transaction. The data begins at time t=0<br/>
@@ -81,7 +84,7 @@ offer_name (string) - 'No_offer' for transactions without offer influence.<br/>
 viewed (float) - 1 if the offer was viewed else 0.<br/>
 completed (float) - 1 if the offer was completed after beeing viewed else 0.<br/>
 performance (float) - <br/>
-
+<br/>
 **df_member.csv**<br/>
 member_id (string) - unique customer id <br/>
 nr_purch (float) - number of purchases made by the customer<br/>
