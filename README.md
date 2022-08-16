@@ -10,21 +10,21 @@ Final project for Udacity Data Science Nanodegree. Implementation of a coupon re
 ## **Project Overview**<br/>
 In this project I will analyze the purchases that Starbucks' customers make with and without offers sent by the Mobile Rewards App. Customers will be clustered based on their purchase behavior and a recommender system will be built, which sends offers to the customers that should optimize their performance. The following steps are included in the code:
 
-#### I. Data Wrangling: <br/>
+#### I. Data Wrangling: (Notebook: 1_Starbucks Wrangling) <br/>
 The challenge was that the transcript data set creates a new row for each interaction. Consequently, the first row would show the time a customer received an offer. The next row would show the time when a customer viewed this or any other offer and the next row would show either the completion of an offer or a regular transaction. Furthermore, each customer could receive each offer multiple times or comlete an offer before he has seen it.<br/> 
 The goal of the data wrangling part was to create a master dataframe (named 'df_mab'), which shows the time and amount of each purchase as well as the time of contact, view, and completion of the offer that influenced the purchase in a single row. Also, the master dataframe contains purchases without offer infuence and offers that were not completed.<br/> 
 Additionally, a customer dataframe was created (named 'df_member'), containg each unique customer with aggregated values regarding his purchase behavior, such as the number of purchases and the amount spent overall, the number of purchases that are influenced by an offer, the number of viewed, completed and not completet offers etc. Most members made five to ten purchases and completed one or two offers. Members with a higher number of purchases often have more completed offers. BOGO offers are more likely to not be completed, whereas discount offers are the type that is completed most often and is less likely not to be completed than BOGO offers.
 
-#### II. Exploratory Analysis: <br/>
+#### II. Exploratory Analysis: (Notebook: 2_Starbucks Visualisation)<br/>
 The data holds a total of 17.000 customers and 10 offers. Transactions without an offer influence get the offer name “No_offer” and will be modeled together with the official offers. This way, customers that perform just as good without an offer can be identified, preventing to send out offers where they are not necessary.
 
-#### III. FunkSVD:<br/>
+#### III. FunkSVD: (Notebook: 3_Starbucks Modeling)<br/>
 Creating a user-by-item matrix with a row for each user, a column for each offer and the mean performance of each user when makeing a transaction with the offer. Transactions without an offer influence have the offer name "No_offer". Performing matrix factorization using a basic form of FunkSVD with no regularization and calculating the dot-product of user matrix and offer matrix, to predict missing values. The dot-products of each user-offer combination will be used to build customer clusters in the following step.
 
-#### IV. K-means Clustering:<br/>
+#### IV. K-means Clustering: (Notebook: 3_Starbucks Modeling)<br/>
 After merging variables like the number of purchases, median amount, number of completed offers and the days since registration to the dot-products of each user-offer combination, the number of clusters is selected with silhouette analysis (https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_silhouette_analysis.html). For 5-7 clusters the silhouette score is similarly high. The K-mean clustering is performed with 5 clusters and the mean reward for each cluster is calculated.
 
-#### V. Multi-Armed Bandits: <br/>
+#### V. Multi-Armed Bandits: (Notebook: 3_Starbucks Modeling)<br/>
 Each cluster is considered as an agent and each offer is the arm of a slot machine. For this project, the the e-greedy-decay algorithm is used, which explores more in the begining and then slowly starts exploiting the most rewarding arm. However, exploration never reaches zero to assure a minimum of variance in the offers made to the customer clusters.
 
 ## **Description of Data Sets**<br/>
